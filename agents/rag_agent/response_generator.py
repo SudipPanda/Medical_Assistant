@@ -70,6 +70,7 @@ class ResponseGenerator:
             chat_history: Optional[List[Dict[str, str]]] = None,
        ):
         
+        
         pass
             
         

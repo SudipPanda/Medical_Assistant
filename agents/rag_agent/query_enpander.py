@@ -1,7 +1,7 @@
 import logging
 from typing import List , Dict , Any
 
-class query_expand():
+class query_expand:
     def __init__(self , config):
         self.logger = logging.getLogger(f"{self.__module__}")
         self.config = config
