@@ -60,6 +60,7 @@ class ChestXray:
                 idx = preds.cpu().numpy()[0]
                 pred_class = self.class_names[idx]
             
+            self.logger.info(f"the predicted class is {pred_class}")
             return pred_class
         
         except Exception as e:
