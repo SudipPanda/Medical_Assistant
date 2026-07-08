@@ -50,7 +50,21 @@ class vector_store:
         except Exception as e:
             self.logger.error(f"an error has occure while creating collection {e}")
             raise e
-    
+        
+    def _load_document(self):
+        sparse_embeddings = FastEmbedSparse(model_name="Qdrant/bm25")
+
+        vector_store = QdrantVectorStore(
+            client = self.client ,
+            collection_name= self.collection_name ,
+            embedding= self.embedding_model , 
+            retrieval_mode=RetrievalMode.HYBRID,
+            vector_name="dense",
+            sparse_vector_name="sparse",
+        )
+
+        return vector_store
+
     def create_vectorStore(
         self , 
         document_chunk:List[str] , 
@@ -97,6 +111,7 @@ class vector_store:
             )
 
             qdrant_vectorstore.add_documents(documents=langchain_document, ids=docs_id)
+            
     
     def retrieve_relevant_document(self , query: str,vectorstore: QdrantVectorStore,
             ):
